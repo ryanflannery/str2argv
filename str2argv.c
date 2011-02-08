@@ -16,8 +16,6 @@
 
 #include "str2argv.h"
 
-#define UNUSED    __attribute__((__unused__))
-
 /* initialize empty argc/argv struct */
 void
 argv_init(int *argc, char ***argv)
