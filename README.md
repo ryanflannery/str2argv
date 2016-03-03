@@ -7,7 +7,7 @@ argc/argv pairs.
 
 Details
 -------
-There are three main functions exported by this library.
+There are three functions exported by this library.
 
 1. The first converts a string (`str`) to an argc/argv pair:
 ```
