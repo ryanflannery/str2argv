@@ -16,6 +16,13 @@
 
 #include "../include/str2argv.h"
 
+#include <err.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+
 /* initialize empty argc/argv struct */
 void
 argv_init(int *argc, char ***argv)
