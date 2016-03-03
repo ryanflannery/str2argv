@@ -24,7 +24,7 @@ clean:
 	rm -f $(LIB)
 	rm -f test
 
-install:
+install: $(LIB)
 	install -c -m 0444 $(HEADER) $(INCDIR)
 	install -c -m 0444 $(LIB) $(LIBDIR)
 
