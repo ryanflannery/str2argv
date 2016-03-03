@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "Edit the PREFIX variable in Makefile to control where the"
+echo "header and library are installed."
