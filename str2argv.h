@@ -23,7 +23,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 /* hard limits on the size of an argv and each entry/token w/in an argv */
 #define ARGV_MAX_ENTRIES    255
 #define ARGV_MAX_TOKEN_LEN  255
@@ -32,12 +31,8 @@
  * Given a string (str), it parses it taking into account escape sequence (\),
  * quoting, etc., and builds an argc/argv style set of parameters that are
  * suitable for passing to any of the cmd_* or ecmd_* functions.
- *
- * This has been tricky for me.  It no doubt has bugs.
- * str2argv.c contains a small driver program that can be used for testing.
- * The Makefile contains the necessary build target "test_str2argv"
  */
-int str2argv(char *str, int *argc, char ***argv, const char **errmsg);
+int str2argv(const char *str, int *argc, char ***argv, const char **errmsg);
 
 /*
  * After the above function is used to build an argc/argv set of parameters,

@@ -1,0 +1,18 @@
+language: c
+
+compiler:
+   - clang
+   - gcc
+
+os:
+   - linux
+
+before_install:
+   - sudo apt-get -qq update
+   - sudo apt-get install -y libtaglib2.0
+   - sudo apt-get install -y libgstreamer0.9
+
+branches:
+   only:
+      - master
+      - stable
