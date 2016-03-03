@@ -14,7 +14,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "str2argv.h"
+#include "../include/str2argv.h"
 
 /* initialize empty argc/argv struct */
 void

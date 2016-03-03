@@ -1,30 +1,44 @@
 # install locations
-PREFIX?=/usr/local
-LIBDIR=$(PREFIX)/lib
-MANDIR=$(PREFIX)/man/man1
+PREFIX ?= /usr/local
+INCDIR = $(PREFIX)/include
+LIBDIR = $(PREFIX)/lib
 
 # build info
-CC?=/usr/bin/cc
-CFLAGS+=-c -std=c89 -Wall -Wextra $(CDEBUG)
-LDFLAGS+=
+CC		 	?=/usr/bin/cc
+CFLAGS	+=-c -std=c89 -Wall -Wextra
 
-OBJS=str2argv.o test.o
+HEADER=include/str2argv.h
+SRC=src/str2argv.c
+OBJ=str2argv.o
+LIB=lib/libstr2argv.a
 
-# main targets
+.PHONY: clean install uninstall
 
-.PHONY: debug clean install uninstall publish-repos man-debug
-
-test:	$(OBJS)
-	$(CC) -o $@ $(LDFLAGS) $(OBJS)
-
-.c.o:
-	$(CC) $(CFLAGS) $<
-
-debug:
-	make CDEBUG="-DDEBUG -g"
+$(LIB): $(SRC) $(HEADER)
+	mkdir -p lib
+	$(CC) $(CFLAGS) -o $(OBJ) $(SRC)
+	ar rcs $(LIB) $(OBJ)
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJ)
+	rm -f $(LIB)
 	rm -f test
 
+install:
+	install -c -m 0444 $(HEADER) $(INCDIR)
+	install -c -m 0444 $(LIB) $(LIBDIR)
 
+uninstall:
+	rm -f $(INCDIR)/$(HEADER)
+	rm -f $(LIBDIR)/$(LIB)
+
+### unit tests (using gtest)
+
+CXX 			 ?= clang++
+TEST_CFLAGS  = -I/usr/local/include
+TEST_LDFLAGS = -L/usr/local/lib -lgtest_main
+TEST_SOURCES = src/str2argv.t.cc
+
+test: src/str2argv.t.cc
+	$(CXX) $(TEST_CFLAGS) $(TEST_LDFLAGS) -o $@ $(TEST_SOURCES)
+	./test
