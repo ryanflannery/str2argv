@@ -29,6 +29,8 @@ main(int argc UNUSED, char *argv[] UNUSED)
    int    margc;
    char  *untoked;
 
+   printf("Enter strings to have them parsed into argc/argv structures\n");
+
    while (fgets(s, sizeof(s), stdin) != NULL) {
 
       /* clean-out last '\n' */
