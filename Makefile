@@ -43,5 +43,5 @@ test: src/str2argv.t.o
 	./test
 
 src/str2argv.t.o: src/str2argv.t.cc
-	$(CXX) -o $@ $(TEST_CFLAGS) src/str2argv.t.c
+	$(CXX) -o $@ $(TEST_CFLAGS) src/str2argv.t.cc
 
