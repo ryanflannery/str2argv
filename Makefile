@@ -36,7 +36,7 @@ uninstall:
 
 CXX 			 ?= clang++
 TEST_CFLAGS  = -I/usr/local/include -c
-TEST_LDFLAGS = -L/usr/lib -L/usr/local/lib -lgtest_main
+TEST_LDFLAGS = -L/usr/lib -L/usr/local/lib -lgtest -lgtest_main
 
 test: src/str2argv.t.o
 	$(CXX) -o $@ $(TEST_LDFLAGS) src/str2argv.t.o
