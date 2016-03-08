@@ -7,9 +7,10 @@ os:
    - linux
 
 install:
-   - sudo apt-get install libgtest-dev
-   - cd /usr/src/gtest
-   - sudo cmake .
-   - sudo make
-   - sudo mv libgtest* /usr/lib/
+   - git clone https://github.com/google/googletest
+   - cd googletest
+   - cmake .
+   - make
+   - sudo cp googlemock/gtest/libgtest.a /usr/lib
+   - sudo cp googlemock/gtest/libgtest_main.a /usr/lib
    - cd "${TRAVIS_BUILD_DIR}"
