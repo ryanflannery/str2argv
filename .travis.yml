@@ -13,4 +13,5 @@ install:
    - make
    - sudo cp googlemock/gtest/libgtest.a /usr/lib
    - sudo cp googlemock/gtest/libgtest_main.a /usr/lib
+   - sudo cp -R googletest/include/gtest /usr/include/
    - cd "${TRAVIS_BUILD_DIR}"
