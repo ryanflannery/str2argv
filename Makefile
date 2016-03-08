@@ -22,7 +22,7 @@ $(LIB): $(SRC) $(HEADER)
 clean:
 	rm -f $(OBJ)
 	rm -f $(LIB)
-	rm -f test
+	rm -f test src/str2argv.t.o
 
 install: $(LIB)
 	install -c -m 0444 $(HEADER) $(INCDIR)
@@ -35,10 +35,13 @@ uninstall:
 ### unit tests (using gtest)
 
 CXX 			 ?= clang++
-TEST_CFLAGS  = -I/usr/local/include
-TEST_LDFLAGS = -L/usr/local/lib -lgtest_main
-TEST_SOURCES = src/str2argv.t.cc
+TEST_CFLAGS  = -I/usr/local/include -c
+TEST_LDFLAGS = -L/usr/lib -L/usr/local/lib -lgtest_main
 
-test: src/str2argv.t.cc
-	$(CXX) $(TEST_CFLAGS) $(TEST_LDFLAGS) -o $@ $(TEST_SOURCES)
+test: src/str2argv.t.o
+	$(CXX) -o $@ $(TEST_LDFLAGS) src/str2argv.t.o
 	./test
+
+src/str2argv.t.o: src/str2argv.t.cc
+	$(CXX) -o $@ $(TEST_CFLAGS) src/str2argv.t.c
+
