@@ -5,26 +5,42 @@ Introduction
 [![Build Status](https://travis-ci.org/ryanflannery/str2argv.svg?branch=master)](https://travis-ci.org/ryanflannery/str2argv)
 
 
-This is a small c utility library to convert between c-style strings and
-argc/argv pairs.
+This is a small portable C (strict C89) library to convert between c-style
+strings and argc/argv pairs. It handles escaping spaces, tabs, etc. Useful if
+you have an application that has shell-like features, where it takes input
+strings/commands from users and runs functions/plugins/etc.
 
 
 Details
 -------
-There are three functions exported by this library.
+There are two main functions exported by this lib.
 
-1. The first converts a string (`str`) to an argc/argv pair:
+The first is to convert a string to an argc/argv pair:
 ```
-    int str2argv(char *str, int *argc, char ***argv, const char **errmsg)
+    int
+    str2argv(char *str, int *argc, char ***argv, const char **errmsg)
 ```
-2. The second does the reverse: given an argc/argv pair, it returns a string.
-```
-    char * argv2str(int argc, char *argv[])
-```
-3. The third will free any argc/argv pair created by the above `str2argv`
-   function.
+The resulting argv can be `free()`d using
 ```
     void argv_free(int *argc, char ***argv)
+```
+
+The second function does the reverse: given an argc/argv pair, it returns a
+string.
+```
+    char*
+    argv2str(int argc, char *argv[])
+```
+
+Install
+-------
+Edit the variables in `Makefile` for where to install the .h and the lib.
+Then
+```
+   $ ./configure
+   $ make
+   $ make install
+   $ make test          /* run gtests */
 ```
 
 License
