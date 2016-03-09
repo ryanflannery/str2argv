@@ -27,10 +27,10 @@
 void
 argv_init(int *argc, char ***argv)
 {
-   if ((*argv = (char**) calloc(ARGV_MAX_ENTRIES, sizeof(char*))) == NULL)
+   if (NULL == (*argv = (char**) calloc(ARGV_MAX_ENTRIES, sizeof(char*))))
       err(1, "argv_init: argv calloc fail");
 
-   if (((*argv)[0] = (char*) calloc(ARGV_MAX_TOKEN_LEN, sizeof(char))) == NULL)
+   if (NULL == ((*argv)[0] = (char*) calloc(ARGV_MAX_TOKEN_LEN, sizeof(char))))
       err(1, "argv_init: argv[i] calloc fail");
 
    bzero((*argv)[0], ARGV_MAX_TOKEN_LEN * sizeof(char));
@@ -57,7 +57,7 @@ argv_addch(int argc, char **argv, int c)
    int n;
 
    n = strlen(argv[argc]);
-   if (n == ARGV_MAX_TOKEN_LEN - 1)
+   if (ARGV_MAX_TOKEN_LEN - 1 == n)
       errx(1, "argv_addch: reached max token length (%d)", ARGV_MAX_TOKEN_LEN);
 
    argv[argc][n] = c;
@@ -67,14 +67,14 @@ argv_addch(int argc, char **argv, int c)
 void
 argv_finish_token(int *argc, char ***argv)
 {
-   if (*argc == ARGV_MAX_ENTRIES - 1)
+   if (ARGV_MAX_ENTRIES - 1 == *argc)
       errx(1, "argv_finish_token: reached max argv entries(%d)", ARGV_MAX_ENTRIES);
 
-   if (strlen((*argv)[*argc]) == 0)
+   if (0 == strlen((*argv)[*argc]))
       return;
 
    *argc = *argc + 1;
-   if (((*argv)[*argc] = (char*) calloc(ARGV_MAX_TOKEN_LEN, sizeof(char))) == NULL)
+   if (NULL == ((*argv)[*argc] = (char*) calloc(ARGV_MAX_TOKEN_LEN, sizeof(char))))
       err(1, "argv_finish_token: failed to calloc argv[i]");
 
    bzero((*argv)[*argc], ARGV_MAX_TOKEN_LEN * sizeof(char));
@@ -246,12 +246,12 @@ argv2str(int argc, char *argv[])
    len = 0;
    for (i = 0; i < argc; i++) {
       len += strlen(argv[i]) + 1;
-      if (strstr(argv[i], " ") != NULL)
+      if (NULL != strstr(argv[i], " "))
          len += 2;
    }
 
    /* allocate result */
-   if ((result = (char*) calloc(len, sizeof(char))) == NULL)
+   if (NULL == (result = (char*) calloc(len, sizeof(char))))
       err(1, "argv2str: calloc failed");
    bzero(result, len);
 
