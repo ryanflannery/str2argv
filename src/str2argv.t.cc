@@ -95,44 +95,44 @@ const char *STR_TestQuotes = "a 'b c' d 'e f g'";
 
 TEST(argv2str, TestEmpty)
 {
-   ASSERT_EQ(NULL, argv2str(0, NULL));
+   EXPECT_EQ(NULL, argv2str(0, NULL));
 }
 
 TEST(argv2str, TestFooBar)
 {
-   ASSERT_STREQ(STR_FooBar,
+   EXPECT_STREQ(STR_FooBar,
                 argv2str(ARGC_FooBar, ARGV_FooBar));
 }
 
 TEST(argv2str, TestMaryHadALittleLamb)
 {
-   ASSERT_STREQ(STR_MaryHadALittleLamb,
+   EXPECT_STREQ(STR_MaryHadALittleLamb,
                 argv2str(ARGC_MaryHadALittleLamb, ARGV_MaryHadALittleLamb));
 }
 
 TEST(argv2str, TestSpaces)
 {
-   ASSERT_STREQ(STR_TestSpaces, argv2str(ARGC_TestSpaces, ARGV_TestSpaces));
+   EXPECT_STREQ(STR_TestSpaces, argv2str(ARGC_TestSpaces, ARGV_TestSpaces));
 }
 
 TEST(argv2str, TestQuotes)
 {
-   ASSERT_STREQ(STR_TestQuotes, argv2str(ARGC_TestQuotes, ARGV_TestQuotes));
+   EXPECT_STREQ(STR_TestQuotes, argv2str(ARGC_TestQuotes, ARGV_TestQuotes));
 }
 
 TEST(argv2str, TestSizeTooSmall)
 {
-   ASSERT_STREQ("foo", argv2str(ARGC_FooBar - 1, ARGV_FooBar));
+   EXPECT_STREQ("foo", argv2str(ARGC_FooBar - 1, ARGV_FooBar));
 }
 
 TEST(argv2str, TestSizeJustRight)
 {
-   ASSERT_STREQ(STR_FooBar, argv2str(ARGC_FooBar, ARGV_FooBar));
+   EXPECT_STREQ(STR_FooBar, argv2str(ARGC_FooBar, ARGV_FooBar));
 }
 
 TEST(argv2str, TestSizeTooBig)
 {
-   ASSERT_STREQ("foo", argv2str(ARGC_FooBar - 1, ARGV_FooBar));
+   EXPECT_STREQ("foo", argv2str(ARGC_FooBar - 1, ARGV_FooBar));
 }
 
 /*
@@ -143,7 +143,7 @@ TEST(argv2str, TestSizeTooBig)
 
 TEST(str2argv, TestNull)
 {
-   ASSERT_EQ(1, str2argv((char*)"some test string", NULL, NULL, NULL));
+   EXPECT_EQ(1, str2argv((char*)"some test string", NULL, NULL, NULL));
 }
 
 TEST(str2argv, TestFooBar)
@@ -152,8 +152,8 @@ TEST(str2argv, TestFooBar)
    char **argv;
    const char *error;
 
-   ASSERT_EQ(0, str2argv(STR_FooBar, &argc, &argv, &error));
-   ASSERT_EQ(true, argvs_match(argc, argv,
+   EXPECT_EQ(0, str2argv(STR_FooBar, &argc, &argv, &error));
+   EXPECT_EQ(true, argvs_match(argc, argv,
          ARGC_FooBar, ARGV_FooBar));
 }
 
@@ -163,8 +163,8 @@ TEST(str2argv, TestMaryHadALittleLamb)
    char **argv;
    const char *error;
 
-   ASSERT_EQ(0, str2argv(STR_MaryHadALittleLamb, &argc, &argv, &error));
-   ASSERT_EQ(true, argvs_match(argc, argv,
+   EXPECT_EQ(0, str2argv(STR_MaryHadALittleLamb, &argc, &argv, &error));
+   EXPECT_EQ(true, argvs_match(argc, argv,
          ARGC_MaryHadALittleLamb, ARGV_MaryHadALittleLamb));
 }
 
@@ -174,8 +174,8 @@ TEST(str2argv, TestSpaces)
    char **argv;
    const char *error;
 
-   ASSERT_EQ(0, str2argv(STR_TestSpaces, &argc, &argv, &error));
-   ASSERT_EQ(true, argvs_match(argc, argv,
+   EXPECT_EQ(0, str2argv(STR_TestSpaces, &argc, &argv, &error));
+   EXPECT_EQ(true, argvs_match(argc, argv,
          ARGC_TestSpaces, ARGV_TestSpaces));
 }
 
@@ -185,8 +185,8 @@ TEST(str2argv, TestQuotes)
    char **argv;
    const char *error;
 
-   ASSERT_EQ(0, str2argv(STR_TestQuotes, &argc, &argv, &error));
-   ASSERT_EQ(true, argvs_match(argc, argv,
+   EXPECT_EQ(0, str2argv(STR_TestQuotes, &argc, &argv, &error));
+   EXPECT_EQ(true, argvs_match(argc, argv,
          ARGC_TestQuotes, ARGV_TestQuotes));
 }
 
